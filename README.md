@@ -1,54 +1,92 @@
-# React + TypeScript + Vite
+# Компонент Tag
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Универсальный компонент для отображения кликабельных/некликабельных тэгов.
 
-Currently, two official plugins are available:
+## Props
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+| Пропс         | Тип                  | По умолчанию | Описание                        |
+| ------------- | -------------------- | ------------ | ------------------------------- |
+| `title`       | `string`             | -            | Текст для отображения           |
+| `className`   | `string`             | `''`         | Дополнительные CSS-классы       |
+| `isClickable` | `boolean`            | `false`      | Делает таб кликабельным         |
+| `onClick`     | `(value: T) => void` | -            | Обработчик клика                |
+| `value`       | `T`                  | -            | Значение для передачи в onClick |
 
-## Expanding the ESLint configuration
+## Примеры использования
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Простой некликабельный тэг
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-});
+```jsx
+<Tab title="Hi" className="bg-white px-3 py-[6px] w-fit rounded-[29px]" />
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Кликабельный тэг с объектом
 
-```js
-// eslint.config.js
-import reactX from "eslint-plugin-react-x";
-import reactDom from "eslint-plugin-react-dom";
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    "react-x": reactX,
-    "react-dom": reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs["recommended-typescript"].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-});
+```jsx
+<Tab<{value: string, id: number}>
+  title="Уютный район"
+  className="bg-white px-3 py-[6px] w-fit rounded-[29px]"
+  value={{ id: 1, value: "sdwd" }}
+  isClickable={true}
+  onClick={(data) => console.log(data)}
+/>
 ```
+
+### Тэг с числовым значением
+
+```jsx
+<Tab<number>
+  title="Цифра"
+  value={42}
+  isClickable
+  onClick={(num) => console.log(num)}
+/>
+```
+
+# Компонент Tags
+
+Универсальный компонент для отображения тэгов
+
+## Props
+
+| Пропс             | Тип            | По умолчанию | Описание                                      |
+| ----------------- | -------------- | ------------ | --------------------------------------------- |
+| `children`        | `ReactNode`    | -            | Добавление тэгов в обёртку                    |
+| `className`       | `string`       | `''`         | Дополнительные CSS-классы                     |
+| `tabClassName`    | `string`       | `''`         | Дополнительные CSS-классы для табов           |
+| `buttonClassName` | `string`       | `''`         | Дополнительные CSS-классы для кнопки действия |
+| `hasExpandButton` | `boolean`      | -            | Нужно ли отображать кнопку для тэгов          |
+| `onExpand`        | `VoidFunction` | -            | Целовое действие при нажатии на кнопку        |
+| `expandedLabel`   | `string`       | -            | Текст в кнопке                                |
+
+## Примеры использования
+
+### Пример компонента тэгов с раскрытием
+
+````jsx
+  const [isCollapsed, setIsCollapsed] = useState(true);
+    const maxTagsLength = 1;
+    const tags = ["test1", "test2", "test3"];
+    const tagsForRender = isCollapsed ? tags.slice(0, maxTagsLength) : tags;
+    const hiddenTagsLength = tags.length - tagsForRender.length;
+    return (
+      <Tags
+        expandedLabel={`+${hiddenTagsLength}`}
+        onExpand={() => setIsCollapsed(!isCollapsed)}
+        buttonClassName={`bg-white px-[8.5px] py-[5px] rounded-full font-bold ${
+          hiddenTagsLength === 0 && "hidden"
+        }`}
+        className="flex gap-2"
+        hasExpandButton
+        tabClassName="bg-white px-3 py-[6px] w-fit rounded-[29px]"
+      >
+        {tagsForRender.map((tag) => (
+          <Tag title={tag} />
+        ))}
+      </Tags>
+    );
+
+    ```
+
+
+````

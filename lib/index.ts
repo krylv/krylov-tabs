@@ -1,2 +1,2 @@
-export { Tab } from "./components";
-export type { TabProps } from "./components";
+export { Tags, Tag } from "./components";
+export type { TagProps, TagsProps } from "./components";
