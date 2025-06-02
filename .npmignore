@@ -1,0 +1,4 @@
+# Исключить из npm-публикации:
+node_modules
+.storybook
+assets

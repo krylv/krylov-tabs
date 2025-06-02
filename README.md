@@ -1,6 +1,26 @@
 # Компонент Tag
 
 Универсальный компонент для отображения кликабельных/некликабельных тэгов.
+В тэг можно передать дженерик с необходимым значением тэга
+
+```jsx
+<Tag<{id:number,value:string}>>
+```
+
+## Установка
+
+Эта библиотека требует следующие зависимости, которые должны быть установлены в вашем проекте:
+
+- `react` (^18.0.0)
+- `react-dom` (^18.0.0)
+- `typescript` (>=4.0.0) — если используете TypeScript
+- `framer-motion` (~5.8.3) - для анимаций
+
+Для установки используйте:
+
+```bash
+npm i krylov-tags react react-dom tailwindcss typescript framer-motion
+```
 
 ## Props
 
@@ -19,13 +39,13 @@
 ### Простой некликабельный тэг
 
 ```jsx
-<Tab title="Hi" className="bg-white px-3 py-[6px] w-fit rounded-[29px]" />
+<Tag title="Hi" className="bg-white px-3 py-[6px] w-fit rounded-[29px]" />
 ```
 
 ### Кликабельный тэг с объектом
 
 ```jsx
-<Tab<{value: string, id: number}>
+<Tag<{value: string, id: number}>
   title="Уютный район"
   className="bg-white px-3 py-[6px] w-fit rounded-[29px]"
   value={{ id: 1, value: "sdwd" }}
@@ -50,7 +70,7 @@
 ### Тэг с числовым значением
 
 ```jsx
-<Tab<number>
+<Tag<number>
   title="Цифра"
   value={42}
   isClickable
@@ -86,7 +106,7 @@ return (
 | ----------------- | -------------- | ------------ | --------------------------------------------- |
 | `children`        | `ReactNode`    | -            | Добавление тэгов в обёртку                    |
 | `className`       | `string`       | `''`         | Дополнительные CSS-классы                     |
-| `tabClassName`    | `string`       | `''`         | Дополнительные CSS-классы для табов           |
+| `tagClassName`    | `string`       | `''`         | Дополнительные CSS-классы для табов           |
 | `buttonClassName` | `string`       | `''`         | Дополнительные CSS-классы для кнопки действия |
 | `hasExpandButton` | `boolean`      | -            | Нужно ли отображать кнопку для тэгов          |
 | `onExpand`        | `VoidFunction` | -            | Целовое действие при нажатии на кнопку        |
@@ -112,7 +132,7 @@ return (
         }`}
         className="flex gap-2"
         hasExpandButton
-        tabClassName="bg-white px-3 py-[6px] w-fit rounded-[29px]"
+        tagClassName="bg-white px-3 py-[6px] w-fit rounded-[29px]"
       >
         {tagsForRender.map((tag) => (
           <Tag title={tag} />
@@ -125,12 +145,20 @@ return (
 
 ### Пример компонента тэгов с тултипом
 
-При необходимости использования тултипа пропс hasExpandedButton должен быть false, чтобы была возможность кастомизировать рендер кнопки и добавить собственные стили (сделано,Чтобы не перегружать универсальный компонент)
+При необходимости использования тултипа пропс hasExpandedButton должен быть false, чтобы была возможность кастомизировать рендер кнопки и добавить собственные стили (сделано,чтобы не перегружать универсальный компонент)
 
 ````jsx
-<div className="w-fit flex gap-2">
+ const [isTooltipVisible, setIsTooltipVisible] = useState(false);
+    const maxLength = 3;
+    const tags = ["test1", "test2", "test3", "test4", "test5"];
+    const tagsForView = tags.slice(0, maxLength);
+    const tagsForTooltip = tags.slice(maxLength);
+    const hiddenTagsLength = tags.length - maxLength;
+
+return (
+  <div className="w-fit flex gap-2">
         <Tags
-          tabClassName="bg-white px-3 py-[6px] rounded-[29px]"
+          tagClassName="bg-white px-3 py-[6px] rounded-[29px]"
           className="flex gap-2 w-fit"
           expandedLabel={`+${hiddenTagsLength}`}
           onMouseEnter={() => setIsTooltipVisible(true)}
@@ -160,5 +188,6 @@ return (
           )}
         </div>
       </div>
+)
       ```
 ````
