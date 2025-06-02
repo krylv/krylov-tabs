@@ -1,5 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react-vite";
 import { Tag } from "./Tag";
+import { useState } from "react";
 const meta = {
   component: Tag,
   title: "Tab",
@@ -22,9 +23,43 @@ export const CheckboxTag: StoryWithType = {
   },
 };
 
-export const UITab: Story = {
+export const UITag: Story = {
   args: {
     title: "Уютный район",
     className: "bg-white px-3 py-[6px] w-fit rounded-[29px] ",
+  },
+};
+
+export const TagWithIcon: Story = {
+  args: {
+    title: "Акции",
+    hasIcon: true,
+    icon: <img src="assets/svg/Discount.svg" />,
+  },
+  render: () => (
+    <Tag
+      title="Акции"
+      className="bg-black text-white flex items-center gap-2 px-3 py-[6px] w-fit rounded-[29px]"
+      hasIcon
+      icon={<img className="size-[13px] " src="assets/svg/Discount.svg" />}
+    />
+  ),
+};
+
+export const ClickableTag: Story = {
+  render: () => {
+    const [isActive, setIsActive] = useState(false);
+
+    return (
+      <Tag
+        title="Уютный район"
+        className="bg-white px-3 py-[6px] w-fit rounded-[29px] "
+        isClickable
+        value={{ id: 1, label: "test" }}
+        isActive={isActive}
+        activeClassName="!bg-red-500"
+        onClick={() => setIsActive(!isActive)}
+      />
+    );
   },
 };

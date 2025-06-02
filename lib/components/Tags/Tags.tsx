@@ -3,25 +3,29 @@ import { motion } from "framer-motion";
 export interface TagsProps {
   children: ReactNode;
   className?: string;
-  tabClassName?: string;
+  tagClassName?: string;
   buttonClassName?: string;
   hasExpandButton?: boolean;
   onExpand?: VoidFunction;
+  onMouseEnter?: VoidFunction;
+  onMouseLeave?: VoidFunction;
   expandedLabel?: string;
 }
 
 export const Tags = ({
   children,
-  tabClassName,
+  tagClassName,
   className,
   buttonClassName,
   expandedLabel,
   hasExpandButton,
   onExpand,
+  onMouseEnter,
+  onMouseLeave,
 }: TagsProps) => {
   const tags = Children.toArray(children);
   return (
-    <div className={`${className} `}>
+    <div className={`${className}`}>
       {tags.map((tab, index) => (
         <motion.div
           initial={{ opacity: 0, x: 10 }}
@@ -29,14 +33,19 @@ export const Tags = ({
           exit={{ opacity: 0, x: 10 }}
           transition={{ delay: 0.02 * index }}
           key={index}
-          className={`${tabClassName}`}
+          className={`${tagClassName}`}
         >
           {tab}
         </motion.div>
       ))}
 
       {hasExpandButton && (
-        <button className={`${buttonClassName}`} onClick={onExpand}>
+        <button
+          className={`${buttonClassName}`}
+          onClick={onExpand}
+          onMouseEnter={onMouseEnter}
+          onMouseLeave={onMouseLeave}
+        >
           {expandedLabel}
         </button>
       )}
