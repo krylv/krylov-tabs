@@ -1,5 +1,5 @@
 {
-  "name": "krylov-tags",
+  "name": "@aerokod/aerokod-tags",
   "version": "1.0.3",
   "type": "module",
   "main": "dist/index.js",
