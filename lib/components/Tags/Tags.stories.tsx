@@ -2,7 +2,6 @@ import { Meta, StoryObj } from "@storybook/react-vite";
 import { Tags } from "./Tags";
 import { Tag } from "../Tag/Tag";
 import { useState } from "react";
-import { motion } from "framer-motion";
 const meta = {
   component: Tags,
   title: "Tabs",
@@ -67,16 +66,11 @@ export const TooltipTags: Story = {
             className="bg-white px-[8.5px] py-[5px] rounded-[29px] font-bold"
           >{`+${hiddenTagsLength}`}</button>
           {isTooltipVisible && (
-            <motion.div
-              initial={{ opacity: 0, y: 5 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 5 }}
-              className="absolute left-0 top-full mt-1 bg-white p-3 rounded shadow-lg z-10"
-            >
+            <div className="absolute left-0 top-full mt-1 bg-white p-3 rounded shadow-lg z-10">
               {tagsForTooltip.map((tag, index) => (
                 <p key={index}>{tag}</p>
               ))}
-            </motion.div>
+            </div>
           )}
         </div>
       </div>
