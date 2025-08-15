@@ -3,7 +3,7 @@ import { Tag } from "./Tag";
 import { useState } from "react";
 const meta = {
   component: Tag,
-  title: "Tab",
+  title: "Tag",
 } satisfies Meta<typeof Tag>;
 
 export default meta;

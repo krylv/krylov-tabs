@@ -147,47 +147,84 @@ return (
 
 При необходимости использования тултипа пропс hasExpandedButton должен быть false, чтобы была возможность кастомизировать рендер кнопки и добавить собственные стили (сделано,чтобы не перегружать универсальный компонент)
 
-````jsx
- const [isTooltipVisible, setIsTooltipVisible] = useState(false);
-    const maxLength = 3;
-    const tags = ["test1", "test2", "test3", "test4", "test5"];
-    const tagsForView = tags.slice(0, maxLength);
-    const tagsForTooltip = tags.slice(maxLength);
-    const hiddenTagsLength = tags.length - maxLength;
+```jsx
+const [isTooltipVisible, setIsTooltipVisible] = useState(false);
+const maxLength = 3;
+const tags = ["test1", "test2", "test3", "test4", "test5"];
+const tagsForView = tags.slice(0, maxLength);
+const tagsForTooltip = tags.slice(maxLength);
+const hiddenTagsLength = tags.length - maxLength;
 
 return (
   <div className="w-fit flex gap-2">
-        <Tags
-          tagClassName="bg-white px-3 py-[6px] rounded-[29px]"
-          className="flex gap-2 w-fit"
-          expandedLabel={`+${hiddenTagsLength}`}
-          onMouseEnter={() => setIsTooltipVisible(true)}
-          onMouseLeave={() => setIsTooltipVisible(false)}
+    <Tags
+      tagClassName="bg-white px-3 py-[6px] rounded-[29px]"
+      className="flex gap-2 w-fit"
+      expandedLabel={`+${hiddenTagsLength}`}
+      onMouseEnter={() => setIsTooltipVisible(true)}
+      onMouseLeave={() => setIsTooltipVisible(false)}
+    >
+      {tagsForView.map((tag, index) => (
+        <Tag key={index} title={tag} />
+      ))}
+    </Tags>
+    <div className="relative">
+      <button
+        onMouseEnter={() => setIsTooltipVisible(true)}
+        onMouseLeave={() => setIsTooltipVisible(false)}
+        className="bg-white px-[8.5px] py-[5px] rounded-[29px] font-bold"
+      >{`+${hiddenTagsLength}`}</button>
+      {isTooltipVisible && (
+        <motion.div
+          initial={{ opacity: 0, y: 5 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 5 }}
+          className="absolute left-0 top-full mt-1 bg-white p-3 rounded shadow-lg z-10"
         >
-          {tagsForView.map((tag, index) => (
-            <Tag key={index} title={tag} />
+          {tagsForTooltip.map((tag, index) => (
+            <p key={index}>{tag}</p>
           ))}
-        </Tags>
-        <div className="relative">
-          <button
-            onMouseEnter={() => setIsTooltipVisible(true)}
-            onMouseLeave={() => setIsTooltipVisible(false)}
-            className="bg-white px-[8.5px] py-[5px] rounded-[29px] font-bold"
-          >{`+${hiddenTagsLength}`}</button>
-          {isTooltipVisible && (
-            <motion.div
-              initial={{ opacity: 0, y: 5 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 5 }}
-              className="absolute left-0 top-full mt-1 bg-white p-3 rounded shadow-lg z-10"
-            >
-              {tagsForTooltip.map((tag, index) => (
-                <p key={index}>{tag}</p>
-              ))}
-            </motion.div>
-          )}
-        </div>
-      </div>
-)
-      ```
+        </motion.div>
+      )}
+    </div>
+  </div>
+);
+```
+
+## Пример использования готовых компачей
+
+### Пример компонента тэгов с тултипом
+
+| Пропс                    | Тип        | По умолчанию | Описание                                           |
+| ------------------------ | ---------- | ------------ | -------------------------------------------------- |
+| `maxLength`              | `number`   | -            | Максимальная длинна тэгов до кнопки                |
+| `tags`                   | `string[]` | `''`         | Массив тэгов                                       |
+| `tagsClassName`          | `string`   | `''`         | Стилизация самих тэгов                             |
+| `containerClassName`     | `string`   | `''`         | Стилизация контейнера (там тэги и кнопка)          |
+| `tagsContainerClassName` | `string`   | -            | Стилизация контейнера с самими тэгами (без кнопки) |
+| `tooltipClassName`       | `string`   | -            | Стилизация тултипа                                 |
+| `buttonClassName`        | `string`   | -            | Стилизация кнопки                                  |
+| `tagInTooltipClassName`  | `string`   | -            | Стилизация тэгов в тултипе                         |
+
+````jsx
+const tags = [
+      "Квартира с ремонтом",
+      "Старт продаж",
+      "Паркинг в подарок",
+      "Кладовая в подарок",
+      "Акция на квартиру",
+    ];
+    return (
+      <TooltipTags
+        maxLength={2}
+        tags={tags}
+        tagsClassName="bg-white p-2 rounded-[15px]"
+        containerClassName="w-fit flex gap-2"
+        tagsContainerClassName="gap-2"
+        tooltipClassName="absolute right-0 top-0 translate-y-3/4 bg-white"
+        buttonClassName="bg-white p-2 rounded-full"
+        tagInTooltipClassName="text-nowrap"
+      />
+    )```
+
 ````
