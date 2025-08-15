@@ -19,7 +19,7 @@
 Для установки используйте:
 
 ```bash
-npm i krylov-tags
+npm i --registry https://npm.aerokod.ru @aerokod/aerokod-tags
 ```
 
 ## Props
