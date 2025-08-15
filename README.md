@@ -19,7 +19,7 @@
 Для установки используйте:
 
 ```bash
-npm i krylov-tags react react-dom tailwindcss typescript framer-motion
+npm i krylov-tags
 ```
 
 ## Props
