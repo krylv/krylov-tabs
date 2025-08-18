@@ -19,7 +19,7 @@ export const TooltipTags = ({
   const hiddenTagsLength = tags.length - maxLength;
 
   return (
-    <div className={`w-fit flex gap-2 ${containerClassName}`}>
+    <div className={`${containerClassName}`}>
       <Tags
         tagClassName={tagsClassName}
         className={`flex ${tagsContainerClassName}`}
@@ -35,7 +35,7 @@ export const TooltipTags = ({
         <button
           onMouseEnter={() => setIsTooltipVisible(true)}
           onMouseLeave={() => setIsTooltipVisible(false)}
-          className={buttonClassName}
+          className={`h-full ${buttonClassName}`}
         >{`+${hiddenTagsLength}`}</button>
         {isTooltipVisible && (
           <div className={tooltipClassName}>

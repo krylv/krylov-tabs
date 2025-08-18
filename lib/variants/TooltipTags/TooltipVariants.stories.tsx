@@ -23,11 +23,11 @@ export const TooltipTagsStory: Story = {
       <TooltipTags
         maxLength={2}
         tags={tags}
-        tagsClassName="bg-white p-2 rounded-[15px]"
+        tagsClassName="bg-white px-[10px] py-[5px] rounded-[15px]"
         containerClassName="w-fit flex gap-2"
         tagsContainerClassName="gap-2"
-        tooltipClassName="absolute right-0 top-0 translate-y-3/4 bg-white"
-        buttonClassName="bg-white p-2 rounded-full"
+        tooltipClassName="absolute right-0 top-0 translate-y-[40px] px-[10px] py-[5px] rounded-[20px] bg-white"
+        buttonClassName="bg-white px-[5px] rounded-full"
         tagInTooltipClassName="text-nowrap"
       />
     );
