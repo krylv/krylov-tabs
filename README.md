@@ -196,7 +196,7 @@ return (
 | `getTagTitle`            | `(tag:T):string` | -            | Устанавливает выбранное поле в качестве имени тэга    |
 | `getTagId`               | `(tag:T):number` | -            | Устанавливает поле в качестве id (в основном для key) |
 
-![Пример компонента](https://github.com/krylv/krylov-tabs/blob/ec9ab7ed38428b0cc6f7751b3d95c81e71ffc15a/assets/png/Tooltip.png?raw=true)
+![Пример компонента](https://github.com/krylv/krylov-tabs/blob/14038b0b1227038b299e8ae1e011a872a34da8eb/assets/png/Tooltip.png?raw=true)
 
 ````jsx
 const tags = [
