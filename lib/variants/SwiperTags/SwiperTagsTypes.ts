@@ -1,8 +1,9 @@
-export interface ISwiperTags {
+export interface ISwiperTags<T> {
   maxLength: number;
-  tags: string[]; //TODO подумать чем заменить
+  tags: T[];
   gap: number;
   swiperClassName?: string;
   swiperSlideClassName?: string;
+  getTagTitle: (tag: T) => string;
   buttonClassName?: string;
 }

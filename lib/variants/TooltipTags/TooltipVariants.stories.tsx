@@ -13,11 +13,9 @@ type Story = StoryObj<typeof TooltipTags>;
 export const TooltipTagsStory: Story = {
   render: () => {
     const tags = [
-      "Квартира с ремонтом",
-      "Старт продаж",
-      "Паркинг в подарок",
-      "Кладовая в подарок",
-      "Акция на квартиру",
+      { id: 1, title: "Квартира с ремонтом" },
+      { id: 2, title: "Квартира с ремонтом" },
+      { id: 3, title: "Квартира с ремонтом" },
     ];
     return (
       <TooltipTags
@@ -25,6 +23,7 @@ export const TooltipTagsStory: Story = {
         tags={tags}
         tagsClassName="bg-white px-[10px] py-[5px] rounded-[15px]"
         containerClassName="w-fit flex gap-2"
+        getTagTitle={(tag) => tag.title}
         tagsContainerClassName="gap-2"
         tooltipClassName="absolute right-0 top-0 translate-y-[40px] px-[10px] py-[5px] rounded-[20px] bg-white"
         buttonClassName="bg-white px-[5px] rounded-full"

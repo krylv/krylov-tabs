@@ -4,14 +4,15 @@ import { MouseEvent, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { ISwiperTags } from "./SwiperTagsTypes";
 
-export const SwiperTags = ({
+export const SwiperTags = <T extends object>({
   maxLength = 2,
   tags,
   gap,
   buttonClassName,
   swiperClassName,
   swiperSlideClassName,
-}: ISwiperTags) => {
+  getTagTitle,
+}: ISwiperTags<T>) => {
   const [isCollapsed, setIsCollapsed] = useState(true);
 
   const tagsForRender = isCollapsed ? tags.slice(0, maxLength) : tags;
@@ -38,7 +39,7 @@ export const SwiperTags = ({
               animate={{ opacity: 1 }}
               transition={{ delay: 0.1 * index, duration: 0.3 }}
             >
-              <p>{tag}</p>
+              <p>{getTagTitle(tag)}</p>
             </motion.div>
           </SwiperSlide>
         ))}

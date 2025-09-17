@@ -2,7 +2,7 @@ import { useState } from "react";
 import { ITooltipTags } from "./TooltipTagsTypes";
 import { Tag, Tags } from "../../components";
 
-export const TooltipTags = ({
+export const TooltipTags = <T extends object>({
   maxLength,
   tags,
   containerClassName,
@@ -11,7 +11,8 @@ export const TooltipTags = ({
   tooltipClassName,
   tagInTooltipClassName,
   buttonClassName,
-}: ITooltipTags) => {
+  getTagTitle,
+}: ITooltipTags<T>) => {
   const [isTooltipVisible, setIsTooltipVisible] = useState(false);
 
   const tagsForView = tags.slice(0, maxLength);
@@ -28,7 +29,7 @@ export const TooltipTags = ({
         onMouseLeave={() => setIsTooltipVisible(false)}
       >
         {tagsForView.map((tag, index) => (
-          <Tag key={index} title={tag} />
+          <Tag key={index} title={getTagTitle(tag)} />
         ))}
       </Tags>
       <div className="relative flex items-center">
@@ -41,7 +42,7 @@ export const TooltipTags = ({
           <div className={tooltipClassName}>
             {tagsForTooltip.map((tag, index) => (
               <p className={tagInTooltipClassName} key={index}>
-                {tag}
+                {getTagTitle(tag)}
               </p>
             ))}
           </div>

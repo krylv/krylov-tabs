@@ -1,11 +1,9 @@
 import { Meta, StoryObj } from "@storybook/react-vite";
 import { SwiperTags } from "./SwiperTags";
 const tags = [
-  "Квартира с ремонтом",
-  "Старт продаж",
-  "Паркинг в подарок",
-  "Кладовая в подарок",
-  "Акция на квартиру",
+  { id: 1, title: "Квартира с ремонтом" },
+  { id: 2, title: "Квартира с ремонтом" },
+  { id: 3, title: "Квартира с ремонтом" },
 ];
 
 const meta = {
@@ -23,9 +21,12 @@ export const SwoperTooltipStory: Story = {
       <div className="w-[500px]">
         <SwiperTags
           swiperClassName="!overflow-visible"
+          swiperSlideClassName="bg-white p-2 rounded-[20px]"
+          buttonClassName="bg-white p-2 rounded-full"
           tags={tags}
           maxLength={2}
-          gap={30}
+          getTagTitle={(tag) => tag.title}
+          gap={15}
         />
       </div>
     );
