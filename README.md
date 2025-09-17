@@ -271,7 +271,7 @@ const tags = [
 | `getTagId`           | `(tag:T):number`  | -            | Устанавливает поле в качестве id (в основном для key) |
 | `isClickable`        | `boolean`         | false        | Указывает кликабелен ли тэг                           |
 
-![Пример компонента](assets/png/Row.png)
+![Пример компонента](/assets/png/Row.png)
 
 ````jsx
 const tags = [
