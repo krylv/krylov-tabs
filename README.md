@@ -19,20 +19,8 @@
 Для установки используйте:
 
 ```bash
-npm i --registry https://npm.aerokod.ru @aerokod/aerokod-tags
+npm i --registry https://npm.aerokod.ru @aerokod/aerokod-tags #Может потребоваться --legacy-peer-deps
 ```
-
-## Props
-
-| Пропс         | Тип                  | По умолчанию | Описание                        |
-| ------------- | -------------------- | ------------ | ------------------------------- |
-| `title`       | `string`             | -            | Текст для отображения           |
-| `className`   | `string`             | `''`         | Дополнительные CSS-классы       |
-| `isClickable` | `boolean`            | `false`      | Делает таб кликабельным         |
-| `onClick`     | `(value: T) => void` | -            | Обработчик клика                |
-| `value`       | `T`                  | -            | Значение для передачи в onClick |
-| `hasIcon`     | `boolean`            | -            | Нужна ли иконка                 |
-| `icon`        | `ReactNode`          | -            | Компонент иконки                |
 
 ## Примеры использования
 
@@ -195,35 +183,116 @@ return (
 
 ### Пример компонента тэгов с тултипом
 
-| Пропс                    | Тип        | По умолчанию | Описание                                           |
-| ------------------------ | ---------- | ------------ | -------------------------------------------------- |
-| `maxLength`              | `number`   | -            | Максимальная длинна тэгов до кнопки                |
-| `tags`                   | `string[]` | `''`         | Массив тэгов                                       |
-| `tagsClassName`          | `string`   | `''`         | Стилизация самих тэгов                             |
-| `containerClassName`     | `string`   | `''`         | Стилизация контейнера (там тэги и кнопка)          |
-| `tagsContainerClassName` | `string`   | -            | Стилизация контейнера с самими тэгами (без кнопки) |
-| `tooltipClassName`       | `string`   | -            | Стилизация тултипа                                 |
-| `buttonClassName`        | `string`   | -            | Стилизация кнопки                                  |
-| `tagInTooltipClassName`  | `string`   | -            | Стилизация тэгов в тултипе                         |
+| Пропс                    | Тип              | По умолчанию | Описание                                              |
+| ------------------------ | ---------------- | ------------ | ----------------------------------------------------- |
+| `maxLength`              | `number`         | -            | Максимальная длинна тэгов до кнопки                   |
+| `tags`                   | `T`              | `''`         | Массив тэгов                                          |
+| `tagsClassName`          | `string`         | `''`         | Стилизация самих тэгов                                |
+| `containerClassName`     | `string`         | `''`         | Стилизация контейнера (там тэги и кнопка)             |
+| `tagsContainerClassName` | `string`         | -            | Стилизация контейнера с самими тэгами (без кнопки)    |
+| `tooltipClassName`       | `string`         | -            | Стилизация тултипа                                    |
+| `buttonClassName`        | `string`         | -            | Стилизация кнопки                                     |
+| `tagInTooltipClassName`  | `string`         | -            | Стилизация тэгов в тултипе                            |
+| `getTagTitle`            | `(tag:T):string` | -            | Устанавливает выбранное поле в качестве имени тэга    |
+| `getTagId`               | `(tag:T):number` | -            | Устанавливает поле в качестве id (в основном для key) |
+
+![Пример компонента](assets/png/Tooltip.png)
 
 ````jsx
 const tags = [
-      "Квартира с ремонтом",
-      "Старт продаж",
-      "Паркинг в подарок",
-      "Кладовая в подарок",
-      "Акция на квартиру",
-    ];
+      {title:"Квартира с ремонтом",id:1,value:'white'},
+      {title:"Квартира с ремонтом",id:1,value:'black'},
+      {title:"Квартира с ремонтом",id:1,value:'e_girl'},
+
+    ]; //Массив тэгс может быть любым, добавлен дженерик
     return (
       <TooltipTags
         maxLength={2}
         tags={tags}
-        tagsClassName="bg-white p-2 rounded-[15px]"
+        tagsClassName="bg-white px-[10px] py-[5px] rounded-[15px]"
         containerClassName="w-fit flex gap-2"
+        getTagTitle={(tag) => tag.title}
+        getTagId={(tag) => tag.id}
         tagsContainerClassName="gap-2"
-        tooltipClassName="absolute right-0 top-0 translate-y-3/4 bg-white"
-        buttonClassName="bg-white p-2 rounded-full"
+        tooltipClassName="absolute right-0 top-0 translate-y-[40px] px-[10px] py-[5px] rounded-[20px] bg-white"
+        buttonClassName="bg-white px-[5px] rounded-full"
         tagInTooltipClassName="text-nowrap"
+      />
+    )```
+
+````
+
+### Пример компонента SwiperTags
+
+| Пропс                  | Тип              | По умолчанию | Описание                                              |
+| ---------------------- | ---------------- | ------------ | ----------------------------------------------------- |
+| `maxLength`            | `number`         | -            | Максимальная длинна тэгов до кнопки                   |
+| `tags`                 | `T`              | `''`         | Массив тэгов                                          |
+| `gap`                  | `number`         | `''`         | Отступ между тэгами                                   |
+| `swiperClassName`      | `string`         | `''`         | Стилизация контейнера тэгов                           |
+| `swiperSlideClassName` | `string`         | -            | Стилизация самих тэгов                                |
+| `buttonClassName`      | `string`         | -            | Стилизация кнопки                                     |
+| `getTagTitle`          | `(tag:T):string` | -            | Устанавливает выбранное поле в качестве имени тэга    |
+| `getTagId`             | `(tag:T):number` | -            | Устанавливает поле в качестве id (в основном для key) |
+
+![Пример компонента](assets/png/Swiper.png)
+
+````jsx
+const tags = [
+      {title:"Квартира с ремонтом",id:1,value:'white'},
+      {title:"Квартира с ремонтом",id:1,value:'black'},
+      {title:"Квартира с ремонтом",id:1,value:'e_girl'},
+
+    ]; //Массив тэгс может быть любым, добавлен дженерик
+    return (
+      <SwiperTags
+          swiperClassName="!overflow-visible"
+          swiperSlideClassName="bg-white p-2 rounded-[20px]"
+          buttonClassName="bg-white p-2 rounded-full"
+          tags={tags}
+          maxLength={2}
+          getTagId={(tag) => tag.id}
+          getTagTitle={(tag) => tag.title}
+          gap={15}
+        />
+    )```
+
+````
+
+### Пример компонента RowTags
+
+| Пропс                | Тип               | По умолчанию | Описание                                              |
+| -------------------- | ----------------- | ------------ | ----------------------------------------------------- |
+| `tags`               | `T`               | `''`         | Массив тэгов                                          |
+| `containerClassName` | `string`          | `''`         | Стилизация контейнера тэгов                           |
+| `tagClassName`       | `string`          | -            | Стилизация самих тэгов                                |
+| `onClick`            | `(tag:T) => void` | -            | Хэндлер для клика по тэгу                             |
+| `getTagTitle`        | `(tag:T):string`  | -            | Устанавливает выбранное поле в качестве имени тэга    |
+| `getTagId`           | `(tag:T):number`  | -            | Устанавливает поле в качестве id (в основном для key) |
+| `isClickable`        | `boolean`         | false        | Указывает кликабелен ли тэг                           |
+
+![Пример компонента](assets/png/Row.png)
+
+````jsx
+const tags = [
+      {title:"Квартира с ремонтом",id:1,value:'white'},
+      {title:"Квартира с ремонтом",id:1,value:'black'},
+      {title:"Квартира с ремонтом",id:1,value:'e_girl'},
+
+    ]; //Массив тэгс может быть любым, добавлен дженерик
+    return (
+      <RowTags
+        tags={tags}
+        getTagTitle={(tag) => tag.title}
+        isClickable={true}
+        getTagId={(tag) => tag.id}
+        containerClassName="flex gap-2 flex-wrap"
+        tagClassName="bg-white p-2 rounded-[15px] cursor-pointer"
+        onClick={(tag) => {
+          let value = tag.value;
+          value += "35";
+          console.log(value);
+        }}
       />
     )```
 

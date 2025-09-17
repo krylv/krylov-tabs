@@ -12,6 +12,7 @@ export const SwiperTags = <T extends object>({
   swiperClassName,
   swiperSlideClassName,
   getTagTitle,
+  getTagId,
 }: ISwiperTags<T>) => {
   const [isCollapsed, setIsCollapsed] = useState(true);
 
@@ -31,18 +32,22 @@ export const SwiperTags = <T extends object>({
       className={swiperClassName}
     >
       <AnimatePresence>
-        {tagsForRender.map((tag, index) => (
-          <SwiperSlide className={`!w-fit ${swiperSlideClassName}`} key={index}>
-            <motion.div
-              key={index}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.1 * index, duration: 0.3 }}
-            >
-              <p>{getTagTitle(tag)}</p>
-            </motion.div>
-          </SwiperSlide>
-        ))}
+        {tagsForRender.map((tag) => {
+          const tagId = getTagId(tag);
+          return (
+            <SwiperSlide className={`!w-fit `} key={tagId}>
+              <motion.div
+                key={tagId}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.1 * tagId, duration: 0.3 }}
+                className={swiperSlideClassName}
+              >
+                <p>{getTagTitle(tag)}</p>
+              </motion.div>
+            </SwiperSlide>
+          );
+        })}
       </AnimatePresence>
       {hiddenTagsLength > 0 && (
         <SwiperSlide className="!w-fit">

@@ -4,6 +4,8 @@ const tags = [
   { id: 1, title: "Квартира с ремонтом" },
   { id: 2, title: "Квартира с ремонтом" },
   { id: 3, title: "Квартира с ремонтом" },
+  { id: 4, title: "Квартира с ремонтом" },
+  { id: 5, title: "Квартира с ремонтом" },
 ];
 
 const meta = {
@@ -25,6 +27,7 @@ export const SwoperTooltipStory: Story = {
           buttonClassName="bg-white p-2 rounded-full"
           tags={tags}
           maxLength={2}
+          getTagId={(tag) => tag.id}
           getTagTitle={(tag) => tag.title}
           gap={15}
         />
