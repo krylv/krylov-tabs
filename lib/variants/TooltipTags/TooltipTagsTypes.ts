@@ -7,5 +7,7 @@ export interface ITooltipTags<T extends object> {
   tooltipClassName: string;
   tagInTooltipClassName?: string;
   getTagTitle: (tag: T) => string;
+  getTagId?: (tag: T) => number;
+
   buttonClassName?: string;
 }

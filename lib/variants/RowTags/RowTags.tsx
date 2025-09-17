@@ -7,15 +7,17 @@ export const RowTags = <T extends object>({
   tagClassName,
   getTagTitle,
   getTagId,
+  onClick,
   ...props
 }: IRowTags<T>) => {
   return (
     <div className={containerClassName}>
       {tags.map((tag) => (
-        <Tag
+        <Tag<T>
           key={getTagId(tag)}
           title={getTagTitle(tag)}
           className={tagClassName}
+          onClick={() => onClick(tag)}
           {...props}
         />
       ))}

@@ -4,6 +4,6 @@ export interface IRowTags<T> {
   getTagId: (tag: T) => number;
   tagClassName?: string;
   containerClassName?: string;
-  onClick?: () => void;
+  onClick?: (tag: T) => void;
   isClickable: boolean;
 }

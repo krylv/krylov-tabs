@@ -12,6 +12,7 @@ export const TooltipTags = <T extends object>({
   tagInTooltipClassName,
   buttonClassName,
   getTagTitle,
+  getTagId,
 }: ITooltipTags<T>) => {
   const [isTooltipVisible, setIsTooltipVisible] = useState(false);
 
@@ -28,8 +29,8 @@ export const TooltipTags = <T extends object>({
         onMouseEnter={() => setIsTooltipVisible(true)}
         onMouseLeave={() => setIsTooltipVisible(false)}
       >
-        {tagsForView.map((tag, index) => (
-          <Tag key={index} title={getTagTitle(tag)} />
+        {tagsForView.map((tag) => (
+          <Tag<T> key={getTagId(tag)} title={getTagTitle(tag)} />
         ))}
       </Tags>
       <div className="relative flex items-center">
