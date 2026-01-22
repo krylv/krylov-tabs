@@ -4,6 +4,7 @@ export interface ISwiperTags<T> {
   gap: number;
   swiperClassName?: string;
   swiperSlideClassName?: string;
+  wrapperClassName?:string
   getTagTitle: (tag: T) => string;
   getTagId: (tag: T) => number;
   buttonClassName?: string;

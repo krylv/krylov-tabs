@@ -12,6 +12,7 @@ export const SwiperTags = <T extends object>({
   swiperSlideClassName,
   getTagTitle,
   getTagId,
+  wrapperClassName
 }: ISwiperTags<T>) => {
   const [isCollapsed, setIsCollapsed] = useState(true);
 
@@ -29,6 +30,7 @@ export const SwiperTags = <T extends object>({
       slidesPerView={"auto"}
       spaceBetween={gap}
       className={swiperClassName}
+      wrapperClass={wrapperClassName}
     >
         {tagsForRender.map((tag) => {
           const tagId = getTagId(tag);
