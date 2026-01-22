@@ -1,7 +1,6 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { MouseEvent, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
 import { ISwiperTags } from "./SwiperTagsTypes";
 
 export const SwiperTags = <T extends object>({
@@ -31,24 +30,19 @@ export const SwiperTags = <T extends object>({
       spaceBetween={gap}
       className={swiperClassName}
     >
-      <AnimatePresence>
         {tagsForRender.map((tag) => {
           const tagId = getTagId(tag);
           return (
             <SwiperSlide className={`!w-fit `} key={tagId}>
-              <motion.div
+              <div
                 key={tagId}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.1 * tagId, duration: 0.3 }}
                 className={swiperSlideClassName}
               >
                 <p>{getTagTitle(tag)}</p>
-              </motion.div>
+              </div>
             </SwiperSlide>
           );
         })}
-      </AnimatePresence>
       {hiddenTagsLength > 0 && (
         <SwiperSlide className="!w-fit">
           <button
