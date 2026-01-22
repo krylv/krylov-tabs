@@ -7,5 +7,5 @@ export default defineConfig({
   splitting: false,
   sourcemap: true,
   clean: true,
-  external: ["node_modules", "assets", "storybook"],
+  external: ["node_modules", "assets", "storybook","react",'react-dom','framer-motion','swiper']     
 });
