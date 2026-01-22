@@ -23,14 +23,18 @@ export const SwoperTooltipStory: Story = {
       <div className="w-[500px]">
         <SwiperTags
           swiperClassName="!overflow-visible"
-          swiperSlideClassName="bg-white p-2 rounded-[20px]"
+          swiperSlideClassName="!w-fit"
           buttonClassName="bg-white p-2 rounded-full"
+          wrapperClassName="flex items-center"
           tags={tags}
           maxLength={2}
           getTagId={(tag) => tag.id}
-          getTagTitle={(tag) => tag.title}
           gap={15}
-        />
+        >
+          {(tag) => (
+            <div>{tag.title}</div>
+          )}
+        </SwiperTags>
       </div>
     );
   },

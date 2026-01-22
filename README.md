@@ -224,16 +224,17 @@ const tags = [
 
 ### Пример компонента SwiperTags
 
-| Пропс                  | Тип              | По умолчанию | Описание                                              |
-| ---------------------- | ---------------- | ------------ | ----------------------------------------------------- |
-| `maxLength`            | `number`         | -            | Максимальная длинна тэгов до кнопки                   |
-| `tags`                 | `T`              | `''`         | Массив тэгов                                          |
-| `gap`                  | `number`         | `''`         | Отступ между тэгами                                   |
-| `swiperClassName`      | `string`         | `''`         | Стилизация контейнера тэгов                           |
-| `swiperSlideClassName` | `string`         | -            | Стилизация самих тэгов                                |
-| `buttonClassName`      | `string`         | -            | Стилизация кнопки                                     |
-| `getTagTitle`          | `(tag:T):string` | -            | Устанавливает выбранное поле в качестве имени тэга    |
-| `getTagId`             | `(tag:T):number` | -            | Устанавливает поле в качестве id (в основном для key) |
+| Пропс                  | Тип                 | По умолчанию | Описание                                              |
+| ---------------------- | --------------------| ------------ | ----------------------------------------------------- |
+| `maxLength`            | `number`            | -            | Максимальная длинна тэгов до кнопки                   |
+| `tags`                 | `T`                 | `''`         | Массив тэгов                                          |
+| `gap`                  | `number`            | `''`         | Отступ между тэгами                                   |
+| `swiperClassName`      | `string`            | `''`         | Стилизация контейнера тэгов                           |
+| `swiperSlideClassName` | `string`            | -            | Стилизация самих тэгов                                |
+| `buttonClassName`      | `string`            | -            | Стилизация кнопки                                     |
+| `getTagId`             | `(tag:T):number`    | -            | Устанавливает поле в качестве id (в основном для key) |
+| `children`             | `(tag:T):ReactNode` | -            | Прокидываем тэг                                        |
+
 
 ![Пример компонента](https://github.com/krylv/krylov-tabs/blob/ec9ab7ed38428b0cc6f7751b3d95c81e71ffc15a/assets/png/Swiper.png?raw=true)
 
@@ -245,16 +246,20 @@ const tags = [
 
     ]; //Массив тэгс может быть любым, добавлен дженерик
     return (
-      <SwiperTags
+     <SwiperTags
           swiperClassName="!overflow-visible"
-          swiperSlideClassName="bg-white p-2 rounded-[20px]"
+          swiperSlideClassName="!w-fit"
           buttonClassName="bg-white p-2 rounded-full"
+          wrapperClassName="flex items-center"
           tags={tags}
           maxLength={2}
           getTagId={(tag) => tag.id}
-          getTagTitle={(tag) => tag.title}
           gap={15}
-        />
+        >
+          {(tag) => (
+            <div>{tag.title}</div>
+          )}
+        </SwiperTags>
     )```
 
 ````

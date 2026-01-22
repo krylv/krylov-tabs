@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export interface ISwiperTags<T> {
   maxLength: number;
   tags: T[];
@@ -5,7 +7,7 @@ export interface ISwiperTags<T> {
   swiperClassName?: string;
   swiperSlideClassName?: string;
   wrapperClassName?:string
-  getTagTitle: (tag: T) => string;
   getTagId: (tag: T) => number;
   buttonClassName?: string;
+  children:(tag:T) => ReactNode
 }

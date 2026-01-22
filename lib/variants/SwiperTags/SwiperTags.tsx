@@ -10,9 +10,9 @@ export const SwiperTags = <T extends object>({
   buttonClassName,
   swiperClassName,
   swiperSlideClassName,
-  getTagTitle,
+  children,
   getTagId,
-  wrapperClassName
+  wrapperClassName,
 }: ISwiperTags<T>) => {
   const [isCollapsed, setIsCollapsed] = useState(true);
 
@@ -35,18 +35,13 @@ export const SwiperTags = <T extends object>({
         {tagsForRender.map((tag) => {
           const tagId = getTagId(tag);
           return (
-            <SwiperSlide className={`!w-fit `} key={tagId}>
-              <div
-                key={tagId}
-                className={swiperSlideClassName}
-              >
-                <p>{getTagTitle(tag)}</p>
-              </div>
+            <SwiperSlide className={swiperSlideClassName} key={tagId}>
+              {children(tag)}
             </SwiperSlide>
           );
         })}
       {hiddenTagsLength > 0 && (
-        <SwiperSlide className="!w-fit">
+        <SwiperSlide className={swiperSlideClassName}>
           <button
             onMouseEnter={() => setIsCollapsed(false)}
             onClick={handleClickCollapsed}
