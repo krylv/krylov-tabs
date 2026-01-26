@@ -1,18 +1,14 @@
 import { useState } from "react";
 import { ITooltipTags } from "./TooltipTagsTypes";
-import { Tag, Tags } from "../../components";
 
 export const TooltipTags = <T extends object>({
   maxLength,
   tags,
   containerClassName,
-  tagsClassName,
-  tagsContainerClassName,
   tooltipClassName,
   buttonClassName,
-  getTagId,
-  getTagTitle,
-  children
+  tagsChildren,
+  tooltipChildren
 }: ITooltipTags<T>) => {
   const [isTooltipVisible, setIsTooltipVisible] = useState(false);
 
@@ -22,31 +18,15 @@ export const TooltipTags = <T extends object>({
 
   return (
     <div className={`${containerClassName}`}>
-      <Tags
-        tagClassName={tagsClassName}
-        className={`flex ${tagsContainerClassName}`}
-        expandedLabel={`+${hiddenTagsLength}`}
-        onMouseEnter={() => setIsTooltipVisible(true)}
-        onMouseLeave={() => setIsTooltipVisible(false)}
-      >
-        {tagsForView.map((tag) => (
-          <Tag<T> key={getTagId(tag)} title={getTagTitle(tag)} />
-        ))}
-      </Tags>
-      <div className="relative flex items-center">
-        <button
-          onMouseEnter={() => setIsTooltipVisible(true)}
-          onMouseLeave={() => setIsTooltipVisible(false)}
-          className={`h-full ${buttonClassName}`}
-        >{`+${hiddenTagsLength}`}</button>
-        {isTooltipVisible && (
-          <div className={tooltipClassName}>
-            {tagsForTooltip.map((tag) => (
-              children(tag)
-            ))}
-          </div>
-        )}
-      </div>
+     {tagsForView.map(tag => <div>
+      {tagsChildren(tag)}
+     </div>)}
+      <button className={buttonClassName} onMouseEnter={() => setIsTooltipVisible(true)} onMouseLeave={() => setIsTooltipVisible(false)}>
+        {`+${hiddenTagsLength}`}
+      </button>
+      {isTooltipVisible && <div className={tooltipClassName}>
+        {tagsForTooltip.map(tag => tooltipChildren(tag))}
+        </div>}
     </div>
   );
 };

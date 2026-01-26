@@ -13,26 +13,20 @@ type Story = StoryObj<typeof TooltipTags>;
 export const TooltipTagsStory: Story = {
   render: () => {
     const tags = [
-      { id: 1, title: "Квартира с ремонтом", new: "zek1" },
-      { id: 2, title: "Квартира с ремонтом", new: "zek2" },
-      { id: 3, title: "Квартира с ремонтом", new: "zek3" },
+      { id: 1, title: "Квартира с ремонтом", with_selection: true },
+      { id: 2, title: "Квартира с ремонтом", with_selection: false },
+      { id: 3, title: "Квартира с ремонтом", with_selection: false },
     ];
     return (
-      <TooltipTags<{id:number,title:string,new:string}>
+      <TooltipTags<{id:number,title:string,with_selection:boolean}>
         maxLength={2}
         tags={tags}
-        tagsClassName="bg-red-500 px-[10px] py-[5px] rounded-[15px]"
-        containerClassName="w-fit flex gap-2"
-        getTagTitle={(tag) => tag.title}
-        getTagId={(tag) => tag.id}
-        tagsContainerClassName="gap-2"
+        containerClassName={`w-fit flex gap-2 relative ${tags}`}
+        tagsChildren={(tag) => <div key={tag.id}>{tag.title}</div>}
         tooltipClassName="absolute right-0 top-0 translate-y-[40px] px-[10px] py-[5px] rounded-[20px] bg-red-500"
         buttonClassName="bg-white px-[5px] rounded-full"
-      >
-        {(tag) => (
-          <div className="text-nowrap ">{tag.new}</div>
-        )}
-      </TooltipTags>
+        tooltipChildren={(tag) => <p key={tag.id}>{tag.title}</p>}
+      />
     );
   },
 };
