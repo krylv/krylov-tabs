@@ -9,10 +9,10 @@ export const TooltipTags = <T extends object>({
   tagsClassName,
   tagsContainerClassName,
   tooltipClassName,
-  tagInTooltipClassName,
   buttonClassName,
-  getTagTitle,
   getTagId,
+  getTagTitle,
+  children
 }: ITooltipTags<T>) => {
   const [isTooltipVisible, setIsTooltipVisible] = useState(false);
 
@@ -41,10 +41,8 @@ export const TooltipTags = <T extends object>({
         >{`+${hiddenTagsLength}`}</button>
         {isTooltipVisible && (
           <div className={tooltipClassName}>
-            {tagsForTooltip.map((tag, index) => (
-              <p className={tagInTooltipClassName} key={index}>
-                {getTagTitle(tag)}
-              </p>
+            {tagsForTooltip.map((tag) => (
+              children(tag)
             ))}
           </div>
         )}
