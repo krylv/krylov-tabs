@@ -21,9 +21,9 @@ export const TooltipTags = <T extends object>({
      {tagsForView.map(tag => <div>
       {tagsChildren(tag)}
      </div>)}
-      <button className={buttonClassName} onMouseEnter={() => setIsTooltipVisible(true)} onMouseLeave={() => setIsTooltipVisible(false)}>
+     {hiddenTagsLength > 0 &&  <button className={buttonClassName} onMouseEnter={() => setIsTooltipVisible(true)} onMouseLeave={() => setIsTooltipVisible(false)}>
         {`+${hiddenTagsLength}`}
-      </button>
+      </button>}
       {isTooltipVisible && <div className={tooltipClassName}>
         {tagsForTooltip.map(tag => tooltipChildren(tag))}
         </div>}
