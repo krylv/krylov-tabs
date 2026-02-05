@@ -270,35 +270,17 @@ const tags = [
 | -------------------- | ----------------- | ------------ | ----------------------------------------------------- |
 | `tags`               | `T`               | `''`         | Массив тэгов                                          |
 | `containerClassName` | `string`          | `''`         | Стилизация контейнера тэгов                           |
-| `tagClassName`       | `string`          | -            | Стилизация самих тэгов                                |
-| `onClick`            | `(tag:T) => void` | -            | Хэндлер для клика по тэгу                             |
-| `getTagTitle`        | `(tag:T):string`  | -            | Устанавливает выбранное поле в качестве имени тэга    |
-| `getTagId`           | `(tag:T):number`  | -            | Устанавливает поле в качестве id (в основном для key) |
+| `children`           | `(tag:T) => void` | -            | Стилизация самих тэгов                                |
 | `isClickable`        | `boolean`         | false        | Указывает кликабелен ли тэг                           |
 
 ![Пример компонента](https://github.com/krylv/krylov-tabs/blob/ec9ab7ed38428b0cc6f7751b3d95c81e71ffc15a/assets/png/Row.png?raw=true)
 
 ````jsx
-const tags = [
-      {title:"Квартира с ремонтом",id:1,value:'white'},
-      {title:"Квартира с ремонтом",id:1,value:'black'},
-      {title:"Квартира с ремонтом",id:1,value:'e_girl'},
-
-    ]; //Массив тэгс может быть любым, добавлен дженерик
-    return (
-      <RowTags
-        tags={tags}
-        getTagTitle={(tag) => tag.title}
-        isClickable={true}
-        getTagId={(tag) => tag.id}
-        containerClassName="flex gap-2 flex-wrap"
-        tagClassName="bg-white p-2 rounded-[15px] cursor-pointer"
-        onClick={(tag) => {
-          let value = tag.value;
-          value += "35";
-          console.log(value);
-        }}
-      />
-    )```
+ <div className="w-full">
+     <RowTags isClickable tags={tags} containerClassName="flex text-nowrap gap-3" >
+      {(tag) => <div key={tag.id}>
+        {tag.name}</div>}
+     </RowTags>
+    </div>
 
 ````

@@ -2,9 +2,9 @@ import { Meta, StoryObj } from "@storybook/react-vite";
 import { RowTags } from "./RowTags";
 
 const tags = [
-  { id: 1, title: "Квартира с ремонтом", value: "zek1" },
-  { id: 2, title: "Квартира с ремонтом", value: "zek2" },
-  { id: 3, title: "Квартира с ремонтом", value: "zek3" },
+  { id: 1, name: "Квартира с ремонтом", value: "zek1" },
+  { id: 2, name: "Квартира с ремонт", value: "zek3" },
+  { id: 3, name: "Квартира с ремонтом", value: "zek3" },
 ];
 
 const meta = {
@@ -19,19 +19,10 @@ type Story = StoryObj<typeof RowTags>;
 export const RowTagsStory: Story = {
   render: () => (
     <div className="w-full">
-      <RowTags
-        tags={tags}
-        getTagTitle={(tag) => tag.title}
-        isClickable={true}
-        getTagId={(tag) => tag.id}
-        containerClassName="flex gap-2 flex-wrap"
-        tagClassName="bg-white p-2 rounded-[15px] cursor-pointer"
-        onClick={(tag) => {
-          let value = tag.value;
-          value += "35";
-          console.log(value);
-        }}
-      />
+     <RowTags isClickable tags={tags} containerClassName="flex text-nowrap gap-3" >
+      {(tag) => <div key={tag.id}>
+        {tag.name}</div>}
+     </RowTags>
     </div>
   ),
 };
